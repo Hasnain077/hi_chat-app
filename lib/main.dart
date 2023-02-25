@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tabahi_chat_app/Screens/splashscreen.dart';
+import 'package:tabahi_chat_app/Screens/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
