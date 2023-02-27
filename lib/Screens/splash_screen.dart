@@ -11,23 +11,21 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
-  @override
-  void moveToNextPage() {
-    Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (c) => const SignupScreen(),
-        ));
-  }
-
+class _SplashScreenState extends State<SplashScreen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animController;
+  late Animation<double> _animDouble;
   @override
   void initState() {
-    print("Hi");
-    Timer(const Duration(seconds: 2), moveToNextPage);
+    _animController = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 1000));
+    _animDouble =
+        CurvedAnimation(parent: _animController, curve: Curves.easeIn);
+
     super.initState();
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
@@ -40,13 +38,16 @@ class _SplashScreenState extends State<SplashScreen> {
                 end: Alignment.bottomRight)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            Card(
-              elevation: 20,
-              child: Padding(
-                padding: EdgeInsets.all(8),
-                child: FlutterLogo(
-                  size: 100,
+          children: [
+            FadeTransition(
+              opacity: _animDouble,
+              child: const Card(
+                elevation: 20,
+                child: Padding(
+                  padding: EdgeInsets.all(8),
+                  child: FlutterLogo(
+                    size: 100,
+                  ),
                 ),
               ),
             ),
