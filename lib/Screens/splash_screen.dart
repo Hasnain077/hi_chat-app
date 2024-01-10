@@ -21,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen>
         vsync: this, duration: const Duration(milliseconds: 1000));
     _animDouble =
         CurvedAnimation(parent: _animController, curve: Curves.easeIn);
-
+     _animController.forward();
     super.initState();
   }
 
@@ -38,6 +38,7 @@ class _SplashScreenState extends State<SplashScreen>
                 end: Alignment.bottomRight)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+
           children: [
             FadeTransition(
               opacity: _animDouble,
